@@ -38,11 +38,10 @@
 	}
 	
 	a.progins {
-		width: 1%;
+		width: 5%;
 		padding: 5px 10px;
 		color: black;
 		font-family: arial;
-		display: block;
 	}
 	
 	a.progins:hover {
