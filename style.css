@@ -36,3 +36,11 @@
 		background-color: darkgrey;
 		color: lightblue;	
 	}
+	
+	a.progins {
+		width: 15%;
+		padding: 10px 10px;
+		color: black;
+		font-family: arial;
+		text-align: center;
+	}
