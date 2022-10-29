@@ -38,9 +38,13 @@
 	}
 	
 	a.progins {
-		width: 15%;
-		padding: 10px 10px;
+		width: 30%;
+		padding: 30px 60px;
 		color: black;
 		font-family: arial;
 		text-align: center;
+	}
+	
+	a.progins:hover {
+	color: blue;
 	}
