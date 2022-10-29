@@ -20,7 +20,7 @@
 	
 	a.menu {
 		display: inline-block;
-		width: 15%;
+		width: 18%;
 		padding: 10px 10px;
 		color: white;
 		text-decoration: none;
@@ -43,6 +43,7 @@
 		color: black;
 		font-family: arial;
 		text-align: center;
+		display: inline-block;
 	}
 	
 	a.progins:hover {
