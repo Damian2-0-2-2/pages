@@ -1,46 +1,38 @@
 <html>
   <head>
     <style>
-      .logo-dvd {
+      .dvd {
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background-color: red;
+        background-color: green;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        animation: move-dvd 10s linear infinite;
-      }
-      
-      @keyframes move-dvd {
-        0% {
-          top: 0;
-          left: 0;
-        }
-        25% {
-          top: 0;
-          left: calc(100% - 100px);
-          background-color: blue;
-        }
-        50% {
-          top: calc(100% - 100px);
-          left: calc(100% - 100px);
-        }
-        75% {
-          top: calc(100% - 100px);
-          left: 0;
-          background-color: green;
-        }
-        100% {
-          top: 0;
-          left: 0;
-          background-color: red;
-        }
+        top: 20px;
+        left: 20px;
       }
     </style>
   </head>
   <body>
-    <div class="logo-dvd"></div>
+    <div class="dvd"></div>
+    <script>
+      const dvd = document.querySelector(".dvd");
+      let x = 20;
+      let y = 20;
+      let dx = 4;
+      let dy = 4;
+
+      setInterval(() => {
+        if (x + 100 >= window.innerWidth || x <= 0) {
+          dx = -dx;
+        }
+        if (y + 100 >= window.innerHeight || y <= 0) {
+          dy = -dy;
+        }
+        x += dx;
+        y += dy;
+        dvd.style.left = `${x}px`;
+        dvd.style.top = `${y}px`;
+      }, 30);
+    </script>
   </body>
 </html>
