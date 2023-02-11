@@ -1,63 +1,61 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      #circle {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 25px;
-        background-color: blue;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="circle"></div>
-    
-    <script>
-      var circle = document.getElementById("circle");
-      var xSpeed = 1;
-      var ySpeed = 1;
-      var x = 50;
-      var y = 50;
-      
-      function moveCircle() {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        
-        x = x + xSpeed;
-        y = y + ySpeed;
-        
-        if (x + 50 >= width || x <= 0) {
-          xSpeed = -xSpeed;
-          changeColor();
-        }
-        
-        if (y + 50 >= height || y <= 0) {
-          ySpeed = -ySpeed;
-          changeColor();
-        }
-        
-        circle.style.left = x + "px";
-        circle.style.top = y + "px";
-        
-        requestAnimationFrame(moveCircle);
-      }
-      
-      function changeColor() {
-        var color = getRandomColor();
-        circle.style.backgroundColor = color;
-      }
-      
-      function getRandomColor() {
-        var letters = "0123456789ABCDEF";
-        var color = "#";
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-      
-      moveCircle();
-    </script>
-  </body>
+<head>
+<style>
+#ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  position: absolute;
+  background-color: red;
+  left: 50px;
+  top: 50px;
+}
+</style>
+</head>
+<body>
+
+<div id="ball"></div>
+<p id="counter"></p>
+
+<script>
+var ball = document.querySelector("#ball");
+var counter = document.querySelector("#counter");
+
+var x = 50;
+var y = 50;
+var dx = 5;
+var dy = 5;
+var bounces = 0;
+
+function moveBall() {
+  x += dx;
+  y += dy;
+
+  if (x + 50 > window.innerWidth || x < 0) {
+    dx = -dx;
+    bounces++;
+    counter.innerHTML = "Liczba odbić: " + bounces;
+  }
+
+  if (y + 50 > window.innerHeight || y < 0) {
+    dy = -dy;
+    bounces++;
+    counter.innerHTML = "Liczba odbić: " + bounces;
+  }
+
+  ball.style.left = x + "px";
+  ball.style.top = y + "px";
+}
+
+setInterval(moveBall, 50);
+
+ball.addEventListener("click", function() {
+  var colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+  var randomColor = colors[Math.floor(Math.random() * colors.length)];
+  ball.style.backgroundColor = randomColor;
+});
+</script>
+
+</body>
 </html>
