@@ -1,61 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#ball {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  position: absolute;
-  background-color: red;
-  left: 50px;
-  top: 50px;
-}
-</style>
+  <style>
+    #ball {
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 <body>
+  <div id="ball"></div>
 
-<div id="ball"></div>
-<p id="counter"></p>
+  <script>
+    const ball = document.querySelector("#ball");
+    let x = 0;
+    let y = 0;
+    let dx = 2;
+    let dy = 2;
+    let bounces = 0;
 
-<script>
-var ball = document.querySelector("#ball");
-var counter = document.querySelector("#counter");
+    function animate() {
+      x += dx;
+      y += dy;
 
-var x = 50;
-var y = 50;
-var dx = 5;
-var dy = 5;
-var bounces = 0;
+      if (x + 50 >= window.innerWidth || x <= 0) {
+        dx = -dx;
+        bounces++;
+        ball.style.backgroundColor = getRandomColor();
+      }
+      if (y + 50 >= window.innerHeight || y <= 0) {
+        dy = -dy;
+        bounces++;
+        ball.style.backgroundColor = getRandomColor();
+      }
 
-function moveBall() {
-  x += dx;
-  y += dy;
+      ball.style.left = x + "px";
+      ball.style.top = y + "px";
 
-  if (x + 50 > window.innerWidth || x < 0) {
-    dx = -dx;
-    bounces++;
-    counter.innerHTML = "Liczba odbić: " + bounces;
-  }
+      requestAnimationFrame(animate);
+    }
 
-  if (y + 50 > window.innerHeight || y < 0) {
-    dy = -dy;
-    bounces++;
-    counter.innerHTML = "Liczba odbić: " + bounces;
-  }
+    function getRandomColor() {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
 
-  ball.style.left = x + "px";
-  ball.style.top = y + "px";
-}
-
-setInterval(moveBall, 50);
-
-ball.addEventListener("click", function() {
-  var colors = ["red", "orange", "yellow", "green", "blue", "purple"];
-  var randomColor = colors[Math.floor(Math.random() * colors.length)];
-  ball.style.backgroundColor = randomColor;
-});
-</script>
-
+    animate();
+  </script>
 </body>
 </html>
