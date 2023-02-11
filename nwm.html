@@ -1,48 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <style>
-    #ball {
-      position: absolute;
-      left: 50px;
-      top: 50px;
-      width: 50px;
-      height: 50px;
-      border-radius: 25px;
-    }
-  </style>
-</head>
-<body>
-  <div id="ball"></div>
-  <script>
-    const ball = document.getElementById("ball");
-    let xSpeed = 5;
-    let ySpeed = 5;
-    let count = 0;
-    let colors = ["red", "blue", "purple", "yellow", "green", "orange"];
-
-    function moveBall() {
-      let x = parseInt(ball.style.left);
-      let y = parseInt(ball.style.top);
-      x = x + xSpeed;
-      y = y + ySpeed;
-      ball.style.left = x + "px";
-      ball.style.top = y + "px";
-
-      if (x + 50 >= window.innerWidth || x <= 0) {
-        xSpeed = -xSpeed;
-        count++;
-        ball.style.backgroundColor = colors[count % colors.length];
+  <head>
+    <script>
+      function showPopup() {
+        alert("Hello, to jest małe okienko pop-up!");
       }
-
-      if (y + 50 >= window.innerHeight || y <= 0) {
-        ySpeed = -ySpeed;
-        count++;
-        ball.style.backgroundColor = colors[count % colors.length];
-      }
-    }
-
-    setInterval(moveBall, 50);
-  </script>
-</body>
+    </script>
+  </head>
+  <body>
+    <button onclick="showPopup()">Pokaż Pop-up</button>
+  </body>
 </html>
