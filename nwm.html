@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script>
-      function showPopup() {
-        alert("Hello, to jest małe okienko pop-up!");
-      }
-    </script>
-  </head>
-  <body>
-    <button onclick="showPopup()">Pokaż Pop-up</button>
-	<button onclick="alert('Hello World!')">Show Pop-up </button>
+<head>
+<style>
+#myPopup {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  border: 1px solid black;
+  transition: background-color 1s linear;
+}
+</style>
+</head>
+<body>
 
-  </body>
+<div id="myPopup" style="display:none; top:50%; left:50%; transform:translate(-50%,-50%)">Pop-up Content</div>
+
+<button onclick="document.getElementById('myPopup').style.display='block'">Show Pop-up</button>
+
+<script>
+setInterval(function() {
+  var popup = document.getElementById("myPopup");
+  var colors = ["lightblue", "yellow", "pink", "lightgreen", "lightgray", "lightcoral", "lightyellow", "lightpink", "lightgreen", "lightblue"];
+  var currentColor = popup.style.backgroundColor;
+  var index = colors.indexOf(currentColor);
+  if (index === -1 || index === colors.length - 1) {
+    popup.style.backgroundColor = colors[0];
+  } else {
+    popup.style.backgroundColor = colors[index + 1];
+  }
+}, 1000);
+</script>
+
+</body>
 </html>
