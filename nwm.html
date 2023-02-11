@@ -2,61 +2,62 @@
 <html>
 <head>
 <style>
-#ball {
+.ball {
   width: 50px;
   height: 50px;
   border-radius: 25px;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: blue;
+  left: 100px;
+  top: 100px;
+  background-color: red;
 }
 </style>
 </head>
 <body>
 
-<div id="ball"></div>
+<div class="ball"></div>
 
 <script>
-const ball = document.querySelector("#ball");
-let counter = 0;
+var ball = document.querySelector(".ball");
+var x = 100;
+var y = 100;
+var dx = 5;
+var dy = 5;
+var bounceCounter = 0;
 
-document.addEventListener("mousemove", function(event) {
-  let x = event.clientX * 100 / window.innerWidth + "%";
-  let y = event.clientY * 100 / window.innerHeight + "%";
-  
-  ball.style.left = x;
-  ball.style.top = y;
-});
+setInterval(moveBall, 10);
 
-document.addEventListener("mouseenter", function() {
-  ball.style.backgroundColor = getRandomColor();
-});
+function moveBall() {
+  x += dx;
+  y += dy;
 
-window.addEventListener("resize", function() {
-  counter = 0;
-});
-
-window.addEventListener("mouseout", function(event) {
-  let x = event.clientX;
-  let y = event.clientY;
-
-  if (x < 0 || x > window.innerWidth || y < 0 || y > window.innerHeight) {
-    ball.style.backgroundColor = getRandomColor();
-    counter += 1;
-    document.body.innerHTML += "<div style='position: absolute; top: 0; right: 0;'>Liczba odbić: " + counter + "</div>";
+  if (x + 50 >= window.innerWidth || x <= 0) {
+    dx = -dx;
+    bounceCounter++;
   }
-});
 
-function getRandomColor() {
-  var letters = "0123456789ABCDEF";
-  var color = "#";
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+  if (y + 50 >= window.innerHeight || y <= 0) {
+    dy = -dy;
+    bounceCounter++;
   }
-  return color;
+
+  ball.style.left = x + "px";
+  ball.style.top = y + "px";
+
+  if (bounceCounter % 2 == 0) {
+    ball.style.backgroundColor = "red";
+  } else {
+    ball.style.backgroundColor = "blue";
+  }
 }
+</script>
+
+<div style="position: absolute; top: 0; right: 0;">
+  Liczba odbić: <span id="counter">0</span>
+</div>
+
+<script>
+document.querySelector("#counter").innerHTML = bounceCounter;
 </script>
 
 </body>
