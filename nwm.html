@@ -1,28 +1,46 @@
-<div id="popup" style="position: absolute; width: 100px; height: 100px; background-color: yellow;">
-</div>
-
-<script>
-var popup = document.getElementById("popup");
-var x = 0;
-var y = 0;
-var step = 1;
-
-function movePopup() {
-  x += step;
-  y += step;
-  popup.style.left = x + "px";
-  popup.style.top = y + "px";
-  
-  if (x >= window.innerWidth || x <= 0) {
-    step = -step;
-  }
-  
-  if (y >= window.innerHeight || y <= 0) {
-    step = -step;
-  }
-  
-  setTimeout(movePopup, 20);
-}
-
-movePopup();
-</script>
+<html>
+  <head>
+    <style>
+      .logo-dvd {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: red;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: move-dvd 10s linear infinite;
+      }
+      
+      @keyframes move-dvd {
+        0% {
+          top: 0;
+          left: 0;
+        }
+        25% {
+          top: 0;
+          left: calc(100% - 100px);
+          background-color: blue;
+        }
+        50% {
+          top: calc(100% - 100px);
+          left: calc(100% - 100px);
+        }
+        75% {
+          top: calc(100% - 100px);
+          left: 0;
+          background-color: green;
+        }
+        100% {
+          top: 0;
+          left: 0;
+          background-color: red;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-dvd"></div>
+  </body>
+</html>
