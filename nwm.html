@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    #ball {
-      width: 50px;
-      height: 50px;
-      border-radius: 25px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  </style>
+<style>
+#ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: blue;
+}
+</style>
 </head>
 <body>
-  <div id="ball"></div>
 
-  <script>
-    const ball = document.querySelector("#ball");
-    let x = 0;
-    let y = 0;
-    let dx = 2;
-    let dy = 2;
-    let bounces = 0;
+<div id="ball"></div>
 
-    function animate() {
-      x += dx;
-      y += dy;
+<script>
+const ball = document.querySelector("#ball");
+let counter = 0;
 
-      if (x + 50 >= window.innerWidth || x <= 0) {
-        dx = -dx;
-        bounces++;
-        ball.style.backgroundColor = getRandomColor();
-      }
-      if (y + 50 >= window.innerHeight || y <= 0) {
-        dy = -dy;
-        bounces++;
-        ball.style.backgroundColor = getRandomColor();
-      }
+document.addEventListener("mousemove", function(event) {
+  let x = event.clientX * 100 / window.innerWidth + "%";
+  let y = event.clientY * 100 / window.innerHeight + "%";
+  
+  ball.style.left = x;
+  ball.style.top = y;
+});
 
-      ball.style.left = x + "px";
-      ball.style.top = y + "px";
+document.addEventListener("mouseenter", function() {
+  ball.style.backgroundColor = getRandomColor();
+});
 
-      requestAnimationFrame(animate);
-    }
+window.addEventListener("resize", function() {
+  counter = 0;
+});
 
-    function getRandomColor() {
-      var letters = "0123456789ABCDEF";
-      var color = "#";
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    }
+window.addEventListener("mouseout", function(event) {
+  let x = event.clientX;
+  let y = event.clientY;
 
-    animate();
-  </script>
+  if (x < 0 || x > window.innerWidth || y < 0 || y > window.innerHeight) {
+    ball.style.backgroundColor = getRandomColor();
+    counter += 1;
+    document.body.innerHTML += "<div style='position: absolute; top: 0; right: 0;'>Liczba odbić: " + counter + "</div>";
+  }
+});
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+</script>
+
 </body>
 </html>
