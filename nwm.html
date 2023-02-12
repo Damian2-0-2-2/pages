@@ -1,7 +1,86 @@
-<button id="myButton">TOP SECRET</button>
+<html>
+  <head>
+  <style>
+      .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: yellow;
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 2px 2px 5px gray;
+      }
+      .popup h2 {
+        margin-top: 20px;
+        font-family: Arial;
+      }
+      .popup button {
+        margin-top: 20px;
+        background-color: lightblue;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-family: Arial;
+        color: white;
+        cursor: pointer;
+      }
+      .popup button:hover {
+        background-color: blue;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+      
+    <div id="popup" class="popup hidden">
+      <h2>zagraj w snake</h2>
+      <button onclick="hidePopup()">zagraj</button>
+    </div>
+    <script>
+      function showPopup() {
+        document.getElementById("popup").classList.remove("hidden");
+      }
 
-<script>
-  document.getElementById("myButton").addEventListener("click", function() {
-    window.open("https://raw.githubusercontent.com/Damian2-0-2-2/pages/main/TOP_SECRET.png", "Jacek", "width=220,height=216");
-  });
-</script>
+      function hidePopup() {
+        document.getElementById("popup").classList.add("hidden");
+      }
+
+      document.querySelector(".menu").addEventListener("click", function(event) {
+        event.preventDefault();
+        showPopup();
+      });
+    </script>
+  
+  
+    <style>
+      #game-board {
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
+        margin: 0 auto;
+        position: relative;
+      }
+      .snake-unit {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: green;
+        border: 1px solid black;
+      }
+      #food {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        background-color: red;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-board"></div>
+  </body>
+  <script src="snake.js"></script>
+</html>
