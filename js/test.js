@@ -1,37 +1,26 @@
-if (top.location != location) {
-  top.location.href = location.href;
-}
-
-}
-
-function init() {
-  playBall();
-  if (bookmark) {
-    bookmark();
-  }
-
-}
 var xOff = 5,
   yOff = 5,
   xPos = 400,
   yPos = -100,
   flagRun = true;
+
 function newXlt() {
   xOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
   window.focus();
 }
+
 function newXrt() {
   xOff = Math.ceil(7 * Math.random()) * 5 - 10;
 }
+
 function newYup() {
   yOff = Math.ceil(0 - 6 * Math.random()) * 5 - 10;
 }
+
 function newYdn() {
   yOff = Math.ceil(7 * Math.random()) * 5 - 10;
 }
-function fOff() {
-  flagrun = false;
-}
+
 function playBall() {
   xPos += xOff;
   yPos += yOff;
@@ -49,6 +38,10 @@ function playBall() {
   }
   if (flagRun) {
     window.moveTo(xPos, yPos);
-    setTimeout(playBall, 50);
+    setTimeout(playBall, 100);
   }
 }
+
+window.onload = function() {
+  playBall();
+};
