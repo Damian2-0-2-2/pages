@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Moja strona</title>
+    <script>
+      function saveComment() {
+        // Pobranie wartości pola tekstowego i daty
+        var comment = document.getElementById("comment").value;
+        var date = new Date().toLocaleString();
+        
+        // Zapisanie komentarza w localStorage
+        localStorage.setItem(date, comment);
+        
+        // Wyczyszczenie pola tekstowego
+        document.getElementById("comment").value = "";
+        
+        // Odświeżenie listy komentarzy
+        refreshComments();
+      }
+      
+      function refreshComments() {
+        // Pobranie referencji do elementu listy
+        var list = document.getElementById("commentsList");
+        
+        // Usunięcie istniejących elementów listy
+        while (list.firstChild) {
+          list.removeChild(list.firstChild);
+        }
+        
+        // Dodanie nowych elementów listy na podstawie zapisanych komentarzy
+        for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          var value = localStorage.getItem(key);
+          
+          var item = document.createElement("li");
+          var text = document.createTextNode(key + ": " + value);
+          item.appendChild(text);
+          list.appendChild(item);
+        }
+      }
+      
+      window.onload = function() {
+        // Odświeżenie listy komentarzy przy załadowaniu strony
+        refreshComments();
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Moja strona</h1>
+    
+    <h2>Komentarze:</h2>
+    <ul id="commentsList"></ul>
+    
+    <h2>Dodaj komentarz:</h2>
+    <textarea id="comment"></textarea>
+    <button onclick="saveComment()">Dodaj</button>
+  </body>
+</html>
