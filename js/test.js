@@ -37,7 +37,8 @@ function playBall() {
     newYdn();
   }
   if (flagRun) {
-    // window.moveTo(xPos, yPos); // Usunięcie tej linii
+window.resizeTo(175, 100);
+    window.moveTo(xPos, yPos);
     setTimeout(playBall, 100);
   }
 }
