@@ -37,7 +37,6 @@ function playBall() {
     newYdn();
   }
   if (flagRun) {
-window.resizeTo(175, 100);
     window.moveTo(xPos, yPos);
     setTimeout(playBall, 100);
   }
@@ -45,4 +44,5 @@ window.resizeTo(175, 100);
 
 window.onload = function() {
   playBall();
+  window.resizeTo(175, 100);
 };
