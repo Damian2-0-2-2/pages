@@ -5,41 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <style>
-    .game-board { width: 300px; height: 300px; border: 1px solid #000; } */
+        /* Dodaj odpowiednie style dla planszy gry */
+        /* Na przykład: */
+        /* .game-board { width: 300px; height: 300px; border: 1px solid #000; } */
     </style>
 </head>
 <body>
     <div class="game-board"></div>
     <script>
         const board = document.querySelector('.game-board');
-        const gridSize = 20;
-        const cellSize = 15; 
-        const snake = [{ x: 10, y: 10 }]; 
+        const gridSize = 20; // Rozmiar siatki (np. 20x20)
+        const cellSize = 15; // Rozmiar komórki w pikselach
+        const snake = [{ x: 10, y: 10 }]; // Początkowa pozycja węża
+        let direction = 'right'; // Początkowy kierunek ruchu
 
-        
+        // Funkcja rysująca planszę
         function drawBoard() {
-            board.innerHTML = ''; 
-            board.innerHTML += `<div class="snake" style="left: ${snake[0].x * cellSize}px; top: ${snake[0].y * cellSize}px;"></div>`;
+            board.innerHTML = ''; // Wyczyść planszę
+            // Narysuj węża i jedzenie (np. kropkę)
+            // Na przykład: board.innerHTML += `<div class="snake" style="left: ${snake[0].x * cellSize}px; top: ${snake[0].y * cellSize}px;"></div>`;
         }
 
-      
+        // Funkcja obsługująca ruch węża
         function moveSnake() {
-          
+            // Logika ruchu węża (np. zmiana pozycji, sprawdzenie kolizji itp.)
+            // Zaktualizuj pozycję węża na planszy
         }
 
-    
+        // Funkcja obsługująca sterowanie (np. klawisze strzałek)
         function handleKeyPress(event) {
-         
+            // Obsłuż naciśnięcie klawisza (np. zmiana kierunku ruchu węża)
+            // Ustaw nowy kierunek na podstawie event.key
         }
 
-      
+        // Inicjalizacja gry
         function initGame() {
-      
+            // Ustaw nasłuchiwanie na klawisze
             document.addEventListener('keydown', handleKeyPress);
-           
+            // Rozpocznij pętlę gry (np. setInterval(moveSnake, 100));
         }
 
-       
+        // Wywołaj funkcję inicjalizacji gry
         initGame();
     </script>
 </body>
