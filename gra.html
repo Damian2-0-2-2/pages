@@ -5,9 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <style>
-        /* Dodaj odpowiednie style dla planszy gry */
-        /* Na przykład: */
-        /* .game-board { width: 300px; height: 300px; border: 1px solid #000; } */
+        .game-board {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            position: relative;
+        }
+        .snake {
+            width: 15px;
+            height: 15px;
+            background-color: green;
+            position: absolute;
+        }
+        .food {
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -16,33 +31,100 @@
         const board = document.querySelector('.game-board');
         const gridSize = 20; // Rozmiar siatki (np. 20x20)
         const cellSize = 15; // Rozmiar komórki w pikselach
-        const snake = [{ x: 10, y: 10 }]; // Początkowa pozycja węża
+        let snake = [{ x: 10, y: 10 }]; // Początkowa pozycja węża
+        let food = { x: 5, y: 5 }; // Początkowa pozycja jedzenia
         let direction = 'right'; // Początkowy kierunek ruchu
+        let gameInterval;
 
         // Funkcja rysująca planszę
         function drawBoard() {
             board.innerHTML = ''; // Wyczyść planszę
-            // Narysuj węża i jedzenie (np. kropkę)
-            // Na przykład: board.innerHTML += `<div class="snake" style="left: ${snake[0].x * cellSize}px; top: ${snake[0].y * cellSize}px;"></div>`;
+            snake.forEach(segment => {
+                const snakeElement = document.createElement('div');
+                snakeElement.style.left = `${segment.x * cellSize}px`;
+                snakeElement.style.top = `${segment.y * cellSize}px`;
+                snakeElement.classList.add('snake');
+                board.appendChild(snakeElement);
+            });
+
+            const foodElement = document.createElement('div');
+            foodElement.style.left = `${food.x * cellSize}px`;
+            foodElement.style.top = `${food.y * cellSize}px`;
+            foodElement.classList.add('food');
+            board.appendChild(foodElement);
         }
 
         // Funkcja obsługująca ruch węża
         function moveSnake() {
-            // Logika ruchu węża (np. zmiana pozycji, sprawdzenie kolizji itp.)
-            // Zaktualizuj pozycję węża na planszy
+            const head = { ...snake[0] };
+            switch (direction) {
+                case 'right':
+                    head.x += 1;
+                    break;
+                case 'left':
+                    head.x -= 1;
+                    break;
+                case 'up':
+                    head.y -= 1;
+                    break;
+                case 'down':
+                    head.y += 1;
+                    break;
+            }
+
+            // Sprawdzenie kolizji z jedzeniem
+            if (head.x === food.x && head.y === food.y) {
+                snake.push({}); // Dodaj nowy segment do węża
+                placeFood(); // Umieść nowe jedzenie na planszy
+            } else {
+                snake.pop(); // Usuń ostatni segment węża
+            }
+
+            snake.unshift(head); // Dodaj nową głowę na początku tablicy
+
+            // Sprawdzenie kolizji ze ścianą lub z samym sobą
+            if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize || snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y)) {
+                clearInterval(gameInterval); // Zatrzymaj grę
+                alert('Game Over!');
+            }
+
+            drawBoard(); // Narysuj zaktualizowaną planszę
+        }
+
+        // Funkcja losująca położenie jedzenia
+        function placeFood() {
+            food.x = Math.floor(Math.random() * gridSize);
+            food.y = Math.floor(Math.random() * gridSize);
+            // Upewnij się, że jedzenie nie pojawi się na wężu
+            while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+                food.x = Math.floor(Math.random() * gridSize);
+                food.y = Math.floor(Math.random() * gridSize);
+            }
         }
 
         // Funkcja obsługująca sterowanie (np. klawisze strzałek)
         function handleKeyPress(event) {
-            // Obsłuż naciśnięcie klawisza (np. zmiana kierunku ruchu węża)
-            // Ustaw nowy kierunek na podstawie event.key
+            switch (event.key) {
+                case 'ArrowUp':
+                    if (direction !== 'down') direction = 'up';
+                    break;
+                case 'ArrowDown':
+                    if (direction !== 'up') direction = 'down';
+                    break;
+                case 'ArrowLeft':
+                    if (direction !== 'right') direction = 'left';
+                    break;
+                case 'ArrowRight':
+                    if (direction !== 'left') direction = 'right';
+                    break;
+            }
         }
 
         // Inicjalizacja gry
         function initGame() {
-            // Ustaw nasłuchiwanie na klawisze
             document.addEventListener('keydown', handleKeyPress);
-            // Rozpocznij pętlę gry (np. setInterval(moveSnake, 100));
+            gameInterval = setInterval(moveSnake, 100);
+            drawBoard();
         }
 
         // Wywołaj funkcję inicjalizacji gry
