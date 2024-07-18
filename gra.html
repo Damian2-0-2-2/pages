@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+    .game-board { width: 300px; height: 300px; border: 1px solid #000; } */
+    </style>
+</head>
+<body>
+    <div class="game-board"></div>
+    <script>
+        const board = document.querySelector('.game-board');
+        const gridSize = 20;
+        const cellSize = 15; 
+        const snake = [{ x: 10, y: 10 }]; 
+
+        
+        function drawBoard() {
+            board.innerHTML = ''; 
+            board.innerHTML += `<div class="snake" style="left: ${snake[0].x * cellSize}px; top: ${snake[0].y * cellSize}px;"></div>`;
+        }
+
+      
+        function moveSnake() {
+          
+        }
+
+    
+        function handleKeyPress(event) {
+         
+        }
+
+      
+        function initGame() {
+      
+            document.addEventListener('keydown', handleKeyPress);
+           
+        }
+
+       
+        initGame();
+    </script>
+</body>
+</html>
