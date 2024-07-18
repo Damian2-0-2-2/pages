@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake</title>
-	<h1>snake</h1>
+    <title>Snake Game</title>
     <style>
         .game-board {
             width: 400px;
@@ -14,21 +13,21 @@
             background-color: #f0f0f0; /* Dodano tło dla lepszej widoczności */
         }
         .snake {
-            width: 15px;
-            height: 15px;
+            width: 13.33px;
+            height: 13.33px;
             background-color: green;
             position: absolute;
         }
         .food {
-            width: 15px;
-            height: 15px;
+            width: 13.33px;
+            height: 13.33px;
             background-color: red;
             position: absolute;
         }
         .eye {
             width: 3px;
             height: 3px;
-            background-color: white;
+            background-color: black;
             position: absolute;
             border-radius: 50%;
         }
@@ -38,10 +37,10 @@
     <div class="game-board"></div>
     <script>
         const board = document.querySelector('.game-board');
-        const gridSize = 30; // Rozmiar siatki (np. 20x20)
-        const cellSize = 15; // Rozmiar komórki w pikselach
-        let snake = [{ x: 0, y: 0 }]; // Początkowa pozycja węża
-        let food = { x: 5, y: 5 }; // Początkowa pozycja jedzenia
+        const gridSize = 30; // Rozmiar siatki (np. 30x30)
+        const cellSize = 400 / gridSize; // Rozmiar komórki w pikselach
+        let snake = [{ x: 15, y: 15 }]; // Początkowa pozycja węża
+        let food = { x: 10, y: 10 }; // Początkowa pozycja jedzenia
         let direction = null; // Początkowy kierunek ruchu
         let gameInterval;
         let gameStarted = false;
